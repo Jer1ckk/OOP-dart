@@ -1,4 +1,7 @@
-enum Skill { FLUTTER, DART, OTHER }
+enum Skill { FLUTTER(500), DART(200), OTHER(100);
+  final int bonus;
+  const Skill(this.bonus);
+}
 
 class Employee {
   final String _name;
@@ -20,20 +23,8 @@ class Employee {
 
   double salary(){
     double total = _yearOfExperience*1000 + _baseSalary;
-    for (Skill skill in _skills){
-      switch(skill) {
-        case Skill.FLUTTER:
-          total += 5000;
-          break;
-
-        case Skill.DART:
-          total +=2500;
-          break;
-
-        case Skill.OTHER:
-          total += 1500;
-          break;
-      }
+    for (Skill skill in _skills) {
+      total += skill.bonus;
     }
     return total;
   }
